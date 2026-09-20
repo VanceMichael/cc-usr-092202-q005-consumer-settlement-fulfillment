@@ -1,0 +1,9 @@
+{
+  "name": "cc-usr-092202-consumer-settlement-fulfillment",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}

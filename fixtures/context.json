@@ -1,0 +1,42 @@
+{
+  "domain": "consumer-settlement-fulfillment",
+  "version": 1,
+  "sample_id": "public-sample-005",
+  "actors": [
+    "消费者",
+    "平台客服",
+    "经营者",
+    "调解与监管人员"
+  ],
+  "facts": [
+    "监管部门计划扩大在线消费纠纷解决机制覆盖",
+    "网络销售与直播带货是持续规范重点",
+    "消费纠纷需要多元化和源头化解"
+  ],
+  "constraints": [
+    "调解协议固化",
+    "义务履约跟踪",
+    "凭证冲突复核",
+    "违约升级"
+  ],
+  "records": [
+    {
+      "id": "consumer-settlement-fulfillment-source",
+      "kind": "source",
+      "label": "监管部门计划扩大在线消费纠纷解决机制覆盖",
+      "status": "active"
+    },
+    {
+      "id": "consumer-settlement-fulfillment-review",
+      "kind": "review",
+      "label": "调解协议固化",
+      "status": "pending"
+    },
+    {
+      "id": "consumer-settlement-fulfillment-history",
+      "kind": "history",
+      "label": "消费纠纷需要多元化和源头化解",
+      "status": "historical"
+    }
+  ]
+}
