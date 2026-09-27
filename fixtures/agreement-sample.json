@@ -1,0 +1,78 @@
+{
+  "id": "agreement-2026-0001",
+  "signed": true,
+  "signed_at": "2026-09-01T10:00:00Z",
+  "version": 1,
+  "handler_id": "mediator-01",
+  "parties": {
+    "consumer": {
+      "real_name": "张某",
+      "phone": "138****0000",
+      "id_number": "1101**********0011"
+    },
+    "merchant": {
+      "real_name": "李某",
+      "phone": "139****0000",
+      "shop": "示例旗舰店"
+    }
+  },
+  "obligations": [
+    {
+      "id": "ob-return",
+      "type": "return",
+      "responsible": "consumer",
+      "deadline": "2026-09-05T00:00:00Z",
+      "addresses": {
+        "from": "消费者收货地址",
+        "to": "商家退货仓"
+      },
+      "evidence": [
+        "logistics_signed"
+      ]
+    },
+    {
+      "id": "ob-refund",
+      "type": "refund",
+      "responsible": "merchant",
+      "deadline": "2026-09-10T00:00:00Z",
+      "amount": 300,
+      "currency": "CNY",
+      "loss_id": "loss-2026-0001",
+      "depends_on": "ob-return",
+      "addresses": {
+        "from": "商家结算账户",
+        "to": "消费者原支付账户"
+      },
+      "evidence": [
+        "payment_callback"
+      ]
+    },
+    {
+      "id": "ob-exchange",
+      "type": "exchange",
+      "responsible": "merchant",
+      "deadline": "2026-09-12T00:00:00Z",
+      "addresses": {
+        "from": "商家发货仓",
+        "to": "消费者收货地址"
+      },
+      "evidence": [
+        "logistics_signed"
+      ]
+    },
+    {
+      "id": "ob-repair",
+      "type": "repair",
+      "responsible": "merchant",
+      "deadline": "2026-09-20T00:00:00Z",
+      "addresses": {
+        "from": "商家维修点",
+        "to": "消费者收货地址"
+      },
+      "evidence": [
+        "repair_report",
+        "logistics_signed"
+      ]
+    }
+  ]
+}

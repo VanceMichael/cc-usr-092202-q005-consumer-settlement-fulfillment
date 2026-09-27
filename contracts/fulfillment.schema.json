@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "消费调解协议履约协议资料",
+  "type": "object",
+  "required": [
+    "id",
+    "handler_id",
+    "parties",
+    "obligations"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "signed": {
+      "type": "boolean"
+    },
+    "signed_at": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "handler_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "当前经办人标识，敏感身份仅向其开放"
+    },
+    "parties": {
+      "type": "object",
+      "required": [
+        "consumer",
+        "merchant"
+      ],
+      "properties": {
+        "consumer": {
+          "type": "object"
+        },
+        "merchant": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "obligations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "responsible",
+          "deadline",
+          "addresses",
+          "evidence"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "refund",
+              "return",
+              "exchange",
+              "repair"
+            ]
+          },
+          "responsible": {
+            "type": "string",
+            "minLength": 1,
+            "description": "责任方"
+          },
+          "deadline": {
+            "type": "string",
+            "description": "履行期限"
+          },
+          "amount": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "退款义务必填"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "loss_id": {
+            "type": "string",
+            "description": "关联损失标识，用于防止同一损失多渠道重复获赔"
+          },
+          "depends_on": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "前置义务标识，如退款以退货签收为前置"
+          },
+          "addresses": {
+            "type": "object",
+            "required": [
+              "from",
+              "to"
+            ],
+            "properties": {
+              "from": {
+                "type": "string",
+                "minLength": 1
+              },
+              "to": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            },
+            "description": "可接受证据类型，如 payment_callback、logistics_signed、repair_report"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

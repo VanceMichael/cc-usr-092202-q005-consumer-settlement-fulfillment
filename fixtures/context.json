@@ -1,6 +1,6 @@
 {
   "domain": "consumer-settlement-fulfillment",
-  "version": 1,
+  "version": 2,
   "sample_id": "public-sample-005",
   "actors": [
     "消费者",
@@ -37,6 +37,18 @@
       "kind": "history",
       "label": "消费纠纷需要多元化和源头化解",
       "status": "historical"
+    },
+    {
+      "id": "consumer-settlement-fulfillment-agreement",
+      "kind": "fixture",
+      "label": "协议义务拆分样例（责任方、期限、金额、收发地址、可接受证据）",
+      "status": "active"
+    },
+    {
+      "id": "consumer-settlement-fulfillment-state-machine",
+      "kind": "logic",
+      "label": "履约确认与违约升级流程（回调幂等、冲突复核、防重复赔偿）",
+      "status": "active"
     }
   ]
 }
