@@ -19,7 +19,20 @@
 
 - `contracts/domain.schema.json` 定义共享资料的字段与基本约束。
 - `fixtures/context.json` 提供不含真实个人信息的公开样例。
-- 源码目录包含资料读取与基础校验逻辑，便于后续服务统一接入。
+- `src/records.js` 读取并校验共享领域资料，便于后续服务统一接入。
+- `src/agreement.js` 协议生成、签署与修订：每项义务拆成责任方、期限、金额、收发地址与可接受证据；已签协议的任何修订必须双方同意，任何一方都不能单独改写。
+- `src/fulfillment.js` 履约跟踪引擎：支付、物流、消费者确认等事件按真实发生时间回放，推导每项义务的状态（已承诺 / 履行中 / 实际完成 / 违约 / 人工复核 / 已取消）。回调按 `callbackId` 去重，重放不会重复完成；部分退款累计冲减剩余责任；拒收回退、退货丢失与凭证冲突先进入人工复核；消费者撤销同意与商家停业按顺序改写剩余义务；同一损失组内一个渠道完成赔付后，其他渠道的承诺自动取消，不会重复赔偿。
+- `src/access.js` 访问控制：敏感身份信息仅向当前经办人开放，其他角色只看到脱敏视图。
+
+## 事件类型
+
+- `payment_callback`：支付机构退款回调，按 `callbackId` 幂等。
+- `logistics_callback`：物流回调，里程碑含 `return_signed` / `exchange_shipped` / `repair_completed` / `return_rejected` / `return_lost`。
+- `consumer_confirmation`：消费者确认或否认收到约定结果。
+- `consumer_revocation`：消费者撤销同意。
+- `merchant_closure`：商家停业。
+- `deadline_check`：期限检查，超期未完成判定违约并升级。
+- `review_resolution`：人工复核处理，仅当前经办人可提交。
 
 ## 本地检查
 
